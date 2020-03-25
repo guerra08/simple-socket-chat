@@ -14,6 +14,7 @@
     "typescript": "^3.8.3"
   },
   "scripts": {
+    "start": "node src/index.js",
     "dev": "ts-node-dev --respawn --transpileOnly src/index.ts"
   },
   "author": "",

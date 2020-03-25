@@ -16,17 +16,17 @@ app.get('/', (req, res) => {
 })
 
 io.on('connection', (socket) => {
-    console.log('user connected')
+    console.log('User connected')
 
     socket.on('chat message', (msg) => {
         io.emit('chat message', msg)
     })
 
     socket.on('disconnect', () => {
-        console.log('user disconnected')
+        console.log('User disconnected')
     })
 })
 
 http.listen(3000, () => {
-    console.log('listening on 3000')
+    console.log('Server is listening on port 3000.')
 })
