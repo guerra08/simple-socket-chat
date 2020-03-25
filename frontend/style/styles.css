@@ -1,0 +1,60 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+h1, h3 {
+    text-align: center;
+}
+
+label{
+    display: block;
+}
+
+.grid-container{
+    display: grid;
+    grid-template-columns: 1.5fr 2fr 1.5fr;
+    grid-template-rows: repeat(4, 5em);
+    margin: 4em;
+}
+
+.message-input-section{
+    grid-column-start: 3;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 1;
+    display: none;
+}
+
+.username-section{
+    grid-column-start: 1;
+    grid-column-end: 1;
+}
+
+.messages-section{
+    grid-column-start: 2;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 1;
+}
+
+#message-in, #username-in{
+    font-size: 0.8em;
+    height: 2em;
+    width: 80%;
+}
+
+#submit-btn, #name-btn{
+    height: 2em;
+    width: 8em;
+    background-color: black;
+    color: #ffffff;
+}
+
+#submit-btn:hover, #name-btn:hover{
+    opacity: 0.6;
+}
+
+#messages-area{
+    height: 100%;
+    width: 90%;
+}

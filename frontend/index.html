@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="style/styles.css" rel="stylesheet">
+    <title>Generic chat app</title>
+</head>
+
+<body>
+    <h1>Generic chat app</h1>
+    <h3>Something something, free for use... chat app</h3>
+
+    <div class="grid-container">
+
+        <div class="username-section">
+
+            <label for="username-in">Type your name: </label>
+            <input type="text" name="message" id="username-in" />
+            <button id="name-btn" onclick="lockName()">Save</button>
+
+        </div>
+
+        <div class="messages-section">
+
+            <textarea id="messages-area" disabled></textarea>
+
+        </div>
+
+        <div class="message-input-section">
+
+            <label for="username-in">Type your message: </label>
+            <input type="text" name="message" id="message-in" />
+            <button id="submit-btn" onclick="sendText()">Send</button>
+
+        </div>
+
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+
+        socket.on('chat message', (msg) => {
+
+            const area = document.getElementById('messages-area')
+            area.value = area.value + msg.username + ': ' + msg.message + '\n'
+
+        })
+
+        function sendText(){
+
+            const text = document.getElementById('message-in')
+
+            const user = document.getElementById('username-in').value
+
+            socket.emit('chat message', {username: user, message: text.value})
+
+            text.value = ''
+
+        }
+
+        function lockName(){
+            
+            const user = document.getElementById('username-in');
+
+            user.disabled = true
+
+            document.getElementById('name-btn').disabled = true
+
+            enableMessages()
+        }
+
+        function enableMessages(){
+            document.getElementsByClassName('message-input-section')[0].style = 'display: block'
+        }
+
+    </script>
+</body>
+
+</html>
