@@ -29,15 +29,13 @@ function enableMessages() {
     socket = io({
         query: {
             name: nameField.value
-        }   
+        }
     });
 
     socket.on('chat message', (msg) => {
-
         const area = document.getElementById('messages-area')
-        area.value = area.value + msg.username + ': ' + msg.message + '\n'
-    
-    })  
+        area.value = `${area.value} ${msg.username}: ${msg.message}\n`
+    })
 }
 
 nameField.addEventListener("keyup", (e) => {
