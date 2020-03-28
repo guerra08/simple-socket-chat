@@ -15,7 +15,7 @@ app.get('/', function (req, res) {
     res.sendFile(frontend + '/index.html');
 });
 io.on('connection', function (socket) {
-    console.log('User connected');
+    console.log("User " + socket.handshake.query.name + " connected");
     socket.on('chat message', function (msg) {
         io.emit('chat message', msg);
     });

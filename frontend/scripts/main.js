@@ -1,29 +1,20 @@
-var socket = io();
-
-socket.on('chat message', (msg) => {
-
-    const area = document.getElementById('messages-area')
-    area.value = area.value + msg.username + ': ' + msg.message + '\n'
-
-})
+var socket;
+const messageField = document.getElementById('message-in')
+const nameField = document.getElementById('username-in')
 
 function sendText() {
 
-    const text = document.getElementById('message-in')
+    const user = nameField.value
 
-    const user = document.getElementById('username-in').value
+    socket.emit('chat message', { username: user, message: messageField.value })
 
-    socket.emit('chat message', { username: user, message: text.value })
-
-    text.value = ''
+    messageField.value = ''
 
 }
 
 function lockName() {
 
-    const user = document.getElementById('username-in');
-
-    user.disabled = true
+    nameField.disabled = true
 
     document.getElementById('name-btn').style = "display: none"
 
@@ -34,4 +25,25 @@ function lockName() {
 
 function enableMessages() {
     document.getElementsByClassName('message-input-section')[0].style = 'display: block'
+
+    socket = io({
+        query: {
+            name: nameField.value
+        }   
+    });
+
+    socket.on('chat message', (msg) => {
+
+        const area = document.getElementById('messages-area')
+        area.value = area.value + msg.username + ': ' + msg.message + '\n'
+    
+    })  
 }
+
+nameField.addEventListener("keyup", (e) => {
+    e.keyCode === 13 ? lockName() : {}
+})
+
+messageField.addEventListener("keyup", (e) => {
+    e.keyCode === 13 ? sendText() : {}
+})
