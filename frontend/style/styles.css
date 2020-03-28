@@ -10,6 +10,24 @@ label{
     display: block;
 }
 
+input{
+    font-size: 1em;
+    height: 2em;
+    width: 80%;
+}
+
+button{
+    height: 2em;
+    width: 8em;
+    background-color: black;
+    color: #ffffff;
+    border-radius: 10px;
+}
+
+button:hover{
+    opacity: 0.6;
+}
+
 .grid-container{
     display: grid;
     grid-template-columns: 1.5fr 2fr 1.5fr;
@@ -37,24 +55,9 @@ label{
     grid-row-end: 1;
 }
 
-#message-in, #username-in{
-    font-size: 0.8em;
-    height: 2em;
-    width: 80%;
-}
-
-#submit-btn, #name-btn{
-    height: 2em;
-    width: 8em;
-    background-color: black;
-    color: #ffffff;
-}
-
-#submit-btn:hover, #name-btn:hover{
-    opacity: 0.6;
-}
-
 #messages-area{
     height: 100%;
     width: 90%;
+    font-size: 1.2em;
+    color: #000000;
 }

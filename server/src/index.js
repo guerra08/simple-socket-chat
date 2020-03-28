@@ -10,6 +10,7 @@ var io = IO(http);
 var frontend = path.join(__dirname, '../../frontend');
 app.use("/frontend", express.static(__dirname + '/../../frontend'));
 app.use("/style", express.static(__dirname + '/../../frontend/style'));
+app.use("/scripts", express.static(__dirname + '/../../frontend/scripts'));
 app.get('/', function (req, res) {
     res.sendFile(frontend + '/index.html');
 });

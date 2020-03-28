@@ -17,7 +17,7 @@
 
         <div class="username-section">
 
-            <label for="username-in">Type your name: </label>
+            <label for="username-in" id="username-label">Type your name: </label>
             <input type="text" name="message" id="username-in" />
             <button id="name-btn" onclick="lockName()">Save</button>
 
@@ -40,44 +40,7 @@
     </div>
 
     <script src="/socket.io/socket.io.js"></script>
-    <script>
-        var socket = io();
-
-        socket.on('chat message', (msg) => {
-
-            const area = document.getElementById('messages-area')
-            area.value = area.value + msg.username + ': ' + msg.message + '\n'
-
-        })
-
-        function sendText(){
-
-            const text = document.getElementById('message-in')
-
-            const user = document.getElementById('username-in').value
-
-            socket.emit('chat message', {username: user, message: text.value})
-
-            text.value = ''
-
-        }
-
-        function lockName(){
-            
-            const user = document.getElementById('username-in');
-
-            user.disabled = true
-
-            document.getElementById('name-btn').disabled = true
-
-            enableMessages()
-        }
-
-        function enableMessages(){
-            document.getElementsByClassName('message-input-section')[0].style = 'display: block'
-        }
-
-    </script>
+    <script src="scripts/main.js"></script>
 </body>
 
 </html>
