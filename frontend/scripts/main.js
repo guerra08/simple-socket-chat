@@ -1,6 +1,7 @@
 var socket;
 const messageField = document.getElementById('message-in')
 const nameField = document.getElementById('username-in')
+const area = document.getElementById('messages-area')
 
 function sendText() {
 
@@ -33,8 +34,11 @@ function enableMessages() {
     });
 
     socket.on('chat message', (msg) => {
-        const area = document.getElementById('messages-area')
-        area.value = `${area.value} ${msg.username}: ${msg.message}\n`
+        area.value = `${area.value} [${new Date().toLocaleTimeString()}] ${msg.username}: ${msg.message}\n`
+    })
+
+    socket.on('conn', (user) => {
+        area.value = `${area.value} [${new Date().toLocaleTimeString()}] User ${user} has been connected\n`
     })
 }
 
