@@ -34,11 +34,15 @@ function enableMessages() {
     });
 
     socket.on('chat message', (msg) => {
-        area.value = `${area.value} [${new Date().toLocaleTimeString()}] ${msg.username}: ${msg.message}\n`
+        area.value = `${area.value} ${msg}`
     })
 
-    socket.on('conn', (user) => {
-        area.value = `${area.value} [${new Date().toLocaleTimeString()}] User ${user} has been connected\n`
+    socket.on('conn', (msgText) => {
+        area.value = `${area.value} ${msgText}`
+    })
+
+    socket.on('current log', (log) => {
+        area.value = `${area.value} ${log}`
     })
 }
 
