@@ -33,16 +33,16 @@ function enableMessages() {
         }
     });
 
-    socket.on('chat message', (msg) => {
-        area.value = `${area.value} ${msg}`
+    socket.on('chat message', (msgText) => {
+        area.value = `${(area.value === null) ? '' : area.value} ${msgText}`
     })
 
-    socket.on('conn', (msgText) => {
-        area.value = `${area.value} ${msgText}`
+    socket.on('conn', (connText) => {
+        area.value = `${(area.value === null) ? '' : area.value} ${connText}`
     })
 
     socket.on('current log', (log) => {
-        area.value = `${area.value} ${log}`
+        area.value = `${(area.value === null) ? '' : area.value} ${log}`
     })
 }
 

@@ -21,15 +21,15 @@ let clients = 0
 
 io.on('connection', (socket) => {
     const user = socket.handshake.query.name
-    clients++
-    console.log(`User ${user} connected`)
-    console.log(`Clients: ${clients}`)
-    
     if(clients !== 0){
         const log = chatLog.readLog()
         console.log(log)
         socket.emit('current log', log)
     }
+    clients++
+
+    console.log(`User ${user} connected`)
+    console.log(`Clients: ${clients}`)
 
     const connText = `[${new Date().toLocaleTimeString()}]: User ${user} has been connected\n`
 
@@ -43,7 +43,7 @@ io.on('connection', (socket) => {
         chatLog.appendToFile(msgText)
     })
 
-    socket.on('disconnect', () => {
+    socket.on('disconnect', () => { 
         clients--
         if(clients === 0){
             chatLog.clearLog()
