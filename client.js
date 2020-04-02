@@ -1,7 +1,7 @@
 const PORT = 33333;
 const HOST = '127.0.0.1';
 
-const prompt = require('prompt')
+const prompt = require('prompts')
 
 const dgram = require('dgram');
 const greeting = "I'm alive!" ;
@@ -13,11 +13,15 @@ client.send(greeting, 0, greeting.length, PORT, HOST, function (err, bytes) {
     console.log('UDP message sent to ' + HOST + ':' + PORT);
 });
 
-prompt.start()
+(async () => {
+    const response = await prompt({
+        type: 'text',
+        name: 'message',
+        message: 'Digita aí fera: '
+    });
 
-prompt.get(['message'], (err, result) => {
-    client.send(result.message, 0, result.message.length, PORT, HOST, function (err, bytes) {
+    client.send(response.message, 0, response.message.length, PORT, HOST, function (err, bytes) {
         if (err) throw err;
         console.log('UDP message sent to ' + HOST + ':' + PORT);
     });
-})
+})()
