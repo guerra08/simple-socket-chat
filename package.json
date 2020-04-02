@@ -1,0 +1,23 @@
+{
+  "name": "simple-socket-chat",
+  "version": "1.0.0",
+  "description": "A simple chat using Node (Express and Sockets.io) and HTML, CSS with Vanilla JS",
+  "main": "client.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guerra08/simple-socket-chat.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/guerra08/simple-socket-chat/issues"
+  },
+  "homepage": "https://github.com/guerra08/simple-socket-chat#readme",
+  "dependencies": {
+    "prompt": "^1.0.0"
+  }
+}
