@@ -31,6 +31,7 @@ function createTcp() {
         const address = server.address();
         console.log('TCP Server listening on ' + address.address + ':' + address.port);
     })
+    
 }
 
 function createUdp() {

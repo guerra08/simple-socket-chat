@@ -3,6 +3,7 @@ const HOST = '127.0.0.1';
 const prompt = require('prompts')
 const dgram = require('dgram');
 const argv = require('yargs').argv
+const net = require('net');
 const greeting = "I'm alive!" ;
 
 if(!argv){
@@ -10,8 +11,14 @@ if(!argv){
     return
 }
 switch(argv.type){
-    case 'tcp': {}
-    case 'udp': createUdp()
+    case 'tcp': {
+        createTcp()
+        break
+    }
+    case 'udp': {
+        createUdp()
+        break
+    }
 }
 
 function createUdp(){
@@ -49,5 +56,16 @@ function createUdp(){
             
         }
     })()
+
+}
+
+function createTcp(){
+
+    const client = net.Socket();
+
+    client.connect(PORT, HOST, function() {
+        console.log('Connected');
+        client.write('Hello, server! Love, Client.');
+    });
 
 }
