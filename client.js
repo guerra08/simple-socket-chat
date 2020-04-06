@@ -1,10 +1,10 @@
-const PORT = 33333;
-const HOST = '127.0.0.1';
+const PORT = 33333
+const HOST = '127.0.0.1'
+const fs = require('fs')
 const prompt = require('prompts')
-const dgram = require('dgram');
+const dgram = require('dgram')
 const argv = require('yargs').argv
-const net = require('net');
-const greeting = "I'm alive!" ;
+const net = require('net')
 
 if(!argv){
     console.log("Invalid args.")
@@ -21,51 +21,59 @@ switch(argv.type){
     }
 }
 
-function createUdp(){
+async function createUdp(){
 
     const client = dgram.createSocket('udp4');
 
-    sendMessage = async (msg) => {
-    
-        if(!msg) return
-    
-        client.send(msg, 0, msg.length, PORT, HOST, function (err, bytes) {
-            if (err) throw err;
-        })
-    } 
-    
-    chatLoop = async () => {
-        const response = await prompt({
-            type: 'text',
-            name: 'message',
-            message: 'Digita aí fera: '
-        })
-    
-        if(!response.message) return
-    
-        await sendMessage(response.message)
-    
-        chatLoop()
-    }
-    
-    (async() => {
-        try{
-            await sendMessage(greeting)
-            await chatLoop()
-        }catch(e){
-            
-        }
-    })()
+    const data = getFile(await askFile())
+
+    client.send(data, 0, data.length, PORT, HOST, (err, bytes) => {
+        if(err) throw err
+        console.log("File sent.")
+    })
 
 }
 
-function createTcp(){
+async function createTcp(){
 
     const client = net.Socket();
 
+    const data = getFile(await askFile())
+
     client.connect(PORT, HOST, function() {
-        console.log('Connected');
-        client.write('Hello, server! Love, Client.');
+        client.write(data);
+        console.log("File sent.")
     });
 
+}
+
+async function chatLoop() {
+    const response = await prompt({
+        type: 'text',
+        name: 'message',
+        message: 'Digita aí fera: '
+    })
+
+    if(!response.message) return
+
+    await sendMessage(response.message)
+
+    chatLoop()
+}
+
+function getFile(size){
+    const data = fs.readFileSync(`./${size}.txt`)
+    return data
+}
+
+async function askFile() {
+    const response = await prompt({
+        type: 'text',
+        name: 'message',
+        message: 'Escolha o arquivo (1500 ou 10000): '
+    })
+
+    if(!response.message) return
+
+    return response.message
 }
