@@ -1,14 +1,4 @@
-# simple-socket-chat
-A simple chat using Node (Express and Sockets.io) and HTML, CSS with Vanilla JS
+# Sockets
+Desenvolvido por Bruno Guerra e Eduardo Lessa.
 
-![app](https://i.imgur.com/UrNlPOy.png)
-
-# Requirements
-
--NodeJS and NPM (latest version is better)
-
-# Usage
-
-First, navigate to the project folder and cd to the server folder. Run npm install and then, npm run start.
-
-After that, navigate to localhost:3000 and start using the app!
+Aplicação de envio de arquivos de texto utilizando sockets desenvolvida para a disciplina de Laboratório de Redes do curso de Engenharia de Software durante o período 2020/01.
